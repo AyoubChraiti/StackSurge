@@ -6,7 +6,7 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:02:34 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/14 09:40:32 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:49:14 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	rrb(t_list *info);
 void	rrr(t_list *info);
 
 void	push_swap(t_list *stacks);
-void	push_back_and_arrange(t_list *stacks);
 void	sort_three_elements(t_list *stacks);
 void	sort_two_elements(t_list *stacks);
 

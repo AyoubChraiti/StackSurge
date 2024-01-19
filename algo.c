@@ -6,7 +6,7 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:02:35 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/13 13:10:28 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/18 22:14:41 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,25 @@ void	sort_three_elements(t_list *stacks)
 {
 	if (stacks->content_length == 3)
 	{
-		if (*stacks->a[0] > *stacks->a[1] && *stacks->a[1] < *stacks->a[2] && *stacks->a[0] < *stacks->a[2])
+		if (*stacks->a[0] > *stacks->a[1] && *stacks->a[1] < *stacks->a[2]
+			&& *stacks->a[0] < *stacks->a[2])
 			sa(stacks);
 		else if (*stacks->a[0] > *stacks->a[1] && *stacks->a[1] > *stacks->a[2])
 		{
 			sa(stacks);
 			rra(stacks);
 		}
-		else if (*stacks->a[0] > *stacks->a[1] && *stacks->a[1] < *stacks->a[2] && *stacks->a[0] > *stacks->a[2])
+		else if (*stacks->a[0] > *stacks->a[1] && *stacks->a[1] < *stacks->a[2]
+			&& *stacks->a[0] > *stacks->a[2])
 			ra(stacks);
-		else if (*stacks->a[0] < *stacks->a[1] && *stacks->a[1] > *stacks->a[2] && *stacks->a[0] < *stacks->a[2])
+		else if (*stacks->a[0] < *stacks->a[1] && *stacks->a[1] > *stacks->a[2]
+			&& *stacks->a[0] < *stacks->a[2])
 		{
 			sa(stacks);
 			ra(stacks);
 		}
-		else if (*stacks->a[0] < *stacks->a[1] && *stacks->a[1] > *stacks->a[2] && *stacks->a[0] > *stacks->a[2])
+		else if (*stacks->a[0] < *stacks->a[1] && *stacks->a[1] > *stacks->a[2]
+			&& *stacks->a[0] > *stacks->a[2])
 			rra(stacks);
 	}
 }

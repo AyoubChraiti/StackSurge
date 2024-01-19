@@ -6,7 +6,7 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:02:49 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/14 09:40:50 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/18 22:16:43 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 int	count_element(char *s)
 {
-	int i = 0;
-	int rs = 0;
+	int	i;
+	int	rs;
+
+	i = 0;
+	rs = 0;
 	while (s[i])
 	{
-		if(s[i] == ' ')
+		if (s[i] == ' ')
 			i++;
-		if(s[i] != ' ')
+		if (s[i] != ' ')
 		{
 			rs++;
-			while(s[i] != ' ' && s[i] != '\0')
+			while (s[i] != ' ' && s[i] != '\0')
 				i++;
 		}
 	}
@@ -57,6 +60,7 @@ int	main(int argc, char **argv)
 	int		i;
 	char	*s;
 	char	*tmp;
+
 	if (argc < 2 || (argc == 2 && !argv[1][0]))
 		exit(1);
 	tmp = NULL;
