@@ -6,7 +6,7 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:01:14 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/10 11:52:18 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/20 09:21:17 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,23 @@ void	rrr(t_list *info)
 void	check_args(char *s)
 {
 	int	i;
+	int	flag;
 
 	i = 0;
+	flag = 0;
 	while (s[i])
 	{
 		if (!ft_isdigit(s[i]) && s[i] != ' ' && s[i] != '-' && s[i] != '+')
 			print_exit();
 		i++;
 	}
+	i = 0;
+	while(s[i])
+	{
+		if(ft_isdigit(s[i]))
+			flag = 1;
+		i++;
+	}
+	if(!flag)
+		print_exit();
 }

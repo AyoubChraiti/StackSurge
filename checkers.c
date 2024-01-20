@@ -6,7 +6,7 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 13:17:33 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/11 14:09:37 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/19 21:37:45 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_sign(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (ft_isdigit(s[i]) && s[i + 1] == '-')
+		if (ft_isdigit(s[i]) && (s[i + 1] == '-' || s[i + 1] == '+'))
 			return (0);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:02:34 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/18 14:49:14 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/20 17:11:28 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>
+# include <limits.h>
 # include "libft/libft.h"
 
 typedef struct s_list
@@ -26,6 +27,8 @@ typedef struct s_list
 	char	*cont;
 	int		count_b;
 	int		content_length;
+	int		index_b;
+	int		index_a;
 }			t_list;
 
 void	print_exit(void);
@@ -34,6 +37,7 @@ int		check_sign(char *s);
 void	parse_stack(t_list *info);
 void	print_stacks(t_list *info);
 void	check_args(char *s);
+
 void	sa(t_list *info);
 void	sb(t_list *info);
 void	pb(t_list *info);
