@@ -6,7 +6,7 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:01:14 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/21 18:57:52 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:30:30 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	initialize_t_list(char *s, t_list *info)
 	int	i;
 
 	i = 0;
+	info->count_b = 0;
 	info->content = ft_split(s, ' ');
 	info->a = (int **)malloc(sizeof(int *) * info->content_length);
 	info->b = (int **)malloc(sizeof(int *) * info->content_length);

@@ -6,7 +6,7 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:57:44 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/10 11:51:15 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/22 21:07:28 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ra(t_list *info)
 {
 	int	i;
 	int	tmp;
-
 	if (info->content_length > 1)
 	{
 		tmp = *info->a[0];

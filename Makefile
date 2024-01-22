@@ -6,7 +6,7 @@
 #    By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/04 17:02:01 by achraiti          #+#    #+#              #
-#    Updated: 2024/01/22 09:39:18 by achraiti         ###   ########.fr        #
+#    Updated: 2024/01/22 17:20:46 by achraiti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = push_swap
 
 NAME2 = checker
 
-SRC = pushswap.c checkers.c rule1.c rule2.c rule3.c algo.c algo2.c
+SRC = pushswap.c checkers.c rule1.c rule2.c rule3.c algo.c algo2.c algo3.c
 
 SRC2 = checker.c rule01.c rule02.c rule03.c checkers.c
 

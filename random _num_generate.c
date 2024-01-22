@@ -6,7 +6,7 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:17:50 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/21 12:51:35 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:37:16 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void generateNonDuplicatedNumbers(int *numbers, int size)
 
 int main()
 {
-	int size = 100;
+	int size = 500;
 	int *numbers = (int *)malloc(size * sizeof(int));
 	if (numbers == NULL)
 	{

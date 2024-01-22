@@ -6,7 +6,7 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:02:49 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/22 15:47:49 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/22 20:50:48 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	main(int argc, char **argv)
 	int		i;
 	char	*s;
 	char	*tmp;
-
 	if (argc < 2)
 		exit(1);
 	tmp = NULL;
@@ -67,7 +66,6 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	info.content_length = count_element(s);
-	info.count_b = 0;
 	info.cont = s;
 	check_args(s);
 	initialize_t_list(s, &info);
