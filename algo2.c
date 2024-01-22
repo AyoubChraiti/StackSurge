@@ -6,104 +6,106 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:51:46 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/20 17:33:55 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:18:16 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int find_index(int **array, int length, int *element)
+int	calculate_cost(t_list *stacks, int index_b, int index_a)
 {
-    int i = 0;
+	int	cost;
 
-    while (i < length)
-    {
-        if (*array[i] == *element)
-            return i;
-        i++;
-    }
-    return -1;
+	cost = 0;
+	if (index_b <= stacks->count_b / 2 || index_b == stacks->count_b / 2)
+		cost += index_b;
+	else
+		cost += stacks->count_b - index_b;
+	if (index_a <= stacks->content_length / 2 || index_a == stacks->content_length / 2)
+		cost += index_a;
+	else
+		cost += stacks->content_length - index_a;
+	return cost;
 }
 
-int calculate_moves(t_list *stacks, int *element)
+int	find_smallest_bigger(t_list *stacks, int num)
 {
-    int moves_to_a;
-    int moves_to_b;
-    int index_a;
-    int index_b;
+	int smallest_bigger;
+	int smallest;
+	int index_bigger;
+	int index_smallest;
+	int i;
 
-    index_a = find_index(stacks->a, stacks->content_length, element);
-    index_b = find_index(stacks->b, stacks->count_b, element);
-    moves_to_a = index_a + 1;
-    moves_to_b = index_b + 1;
-    if (index_a > stacks->content_length / 2)
-        moves_to_a = stacks->content_length - index_a;
-    if (index_b > stacks->count_b / 2)
-        moves_to_b = stacks->count_b - index_b;
-    return (moves_to_b + moves_to_a);
+	smallest_bigger = INT_MAX;
+	smallest = INT_MAX;
+	index_bigger = -1;
+	index_smallest = 0;
+	i = 0;
+	while (i < stacks->content_length)
+	{
+		if (*stacks->a[i] > num && *stacks->a[i] < smallest_bigger)
+		{
+			smallest_bigger = *stacks->a[i];
+			index_bigger = i;
+		}
+		if (*stacks->a[i] < smallest)
+		{
+			smallest = *stacks->a[i];
+			index_smallest = i;
+		}
+		i++;
+	}
+	return (index_bigger != -1 ? index_bigger : index_smallest);
 }
 
-int find_best_match(t_list *stacks)
+t_match	find_cheapest_match(t_list *stacks)
 {
-    int i;
-    int min_moves;
-    int moves;
+	int		i;
+	int		index_a;
+	int		cost;
+	t_match cheapest;
 
-    min_moves = INT_MAX;
-    i = 0;
-    while (i < stacks->count_b)
-    {
-        moves = calculate_moves(stacks, stacks->b[i]);
-        if (moves < min_moves)
-            min_moves = moves;
-        i++;
-    }
-    stacks->index_b = i;
-    return (min_moves);
+	i = 0;
+	cheapest.cost = INT_MAX;
+	while (i < stacks->count_b)
+	{
+		index_a = find_smallest_bigger(stacks, *stacks->b[i]);
+		cost = calculate_cost(stacks, i, index_a);
+		if (cost < cheapest.cost)
+		{
+			cheapest.index_b = i;
+			cheapest.index_a = index_a;
+			cheapest.cost = cost;
+		}
+		i++;
+	}
+	return (cheapest);
 }
 
-void rotate_a_to_match(t_list *stacks, int match_element)
+void	push_swap(t_list *stacks)
 {
-    int index_a = find_index(stacks->a, stacks->content_length, &match_element);
+	t_match cheapest;
 
-    while (index_a != 0)
-    {
-        if (index_a <= stacks->content_length / 2)
-            ra(stacks);
-        else
-            rra(stacks);
-        index_a = find_index(stacks->a, stacks->content_length, &match_element);
-    }
-}
-
-void push_best_match_to_a(t_list *stacks)
-{
-    int best_match_b = *stacks->b[stacks->index_b];
-    rotate_a_to_match(stacks, best_match_b);
-    pa(stacks);
-}
-
-
-void push_swap(t_list *stacks)
-{
-    int min_moves;
-    if (stacks->content_length == 1)
-        return;
-    else if (stacks->content_length == 2)
-        sort_two_elements(stacks);
-    else if (stacks->content_length == 3)
-        sort_three_elements(stacks);
-    else if (stacks->content_length > 3)
-    {
-        while (stacks->content_length > 3)
-        {
-            pb(stacks);
-        }
-        sort_three_elements(stacks);
-        while (stacks->count_b > 0)
-        {
-            min_moves = find_best_match(stacks);
-            push_best_match_to_a(stacks);
-        }
-    }
+	if (stacks->content_length == 1)
+		return;
+	else if (stacks->content_length == 2)
+		sort_two_elements(stacks);
+	else if (stacks->content_length == 3)
+		sort_three_elements(stacks);
+	else if (stacks->content_length > 3)
+	{
+		while (stacks->content_length > 3)
+		{
+			pb(stacks);
+		}
+		sort_three_elements(stacks);
+		while (stacks->count_b > 0)
+		{
+			cheapest = find_cheapest_match(stacks);
+			rotate_until_a(stacks, cheapest.index_a);
+			rotate_until_b(stacks, cheapest.index_b);
+			pa(stacks);
+		}
+		rotate_smallest_to_top(stacks);
+	}
 }

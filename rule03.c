@@ -1,16 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rule3.c                                            :+:      :+:    :+:   */
+/*   rule03.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 17:01:14 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/21 18:57:52 by achraiti         ###   ########.fr       */
+/*   Created: 2024/01/22 09:23:49 by achraiti          #+#    #+#             */
+/*   Updated: 2024/01/22 09:34:08 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
+
+void	check_args(char *s)
+{
+	int	i;
+	int	flag;
+
+	i = 0;
+	flag = 0;
+	while (s[i])
+	{
+		if (!ft_isdigit(s[i]) && s[i] != ' ' && s[i] != '-' && s[i] != '+')
+			print_exit();
+		i++;
+	}
+	i = 0;
+	while(s[i])
+	{
+		if(ft_isdigit(s[i]))
+			flag = 1;
+		i++;
+	}
+	if(!flag)
+		print_exit();
+}
 
 void	rrr(t_list *info)
 {
@@ -35,31 +59,6 @@ void	rrr(t_list *info)
 		i--;
 	}
 	*info->b[0] = tmp;
-	ft_printf("rrr\n");
-}
-
-void	check_args(char *s)
-{
-	int	i;
-	int	flag;
-
-	i = 0;
-	flag = 0;
-	while (s[i])
-	{
-		if (!ft_isdigit(s[i]) && s[i] != ' ' && s[i] != '-' && s[i] != '+')
-			print_exit();
-		i++;
-	}
-	i = 0;
-	while(s[i])
-	{
-		if(ft_isdigit(s[i]))
-			flag = 1;
-		i++;
-	}
-	if(!flag)
-		print_exit();
 }
 
 void	initialize_t_list(char *s, t_list *info)

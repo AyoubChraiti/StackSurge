@@ -6,7 +6,7 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:02:49 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/20 12:07:44 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:47:49 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,6 @@ int	count_element(char *s)
 		}
 	}
 	return (rs);
-}
-
-void	initialize_t_list(char *s, t_list *info)
-{
-	int	i;
-
-	i = 0;
-	info->content = ft_split(s, ' ');
-	info->a = (int **)malloc(sizeof(int *) * info->content_length);
-	info->b = (int **)malloc(sizeof(int *) * info->content_length);
-	if (!info->a || !info->b)
-		exit(1);
-	while (i < info->content_length)
-	{
-		info->a[i] = (int *)malloc(sizeof(int));
-		info->b[i] = (int *)malloc(sizeof(int));
-		if (!info->a[i] || !info->b[i])
-			exit(1);
-		*info->a[i] = ft_atoi(info->content[i]);
-		i++;
-	}
 }
   
 int	main(int argc, char **argv)
