@@ -6,7 +6,7 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 14:44:05 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/10 11:57:05 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:04:15 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int				ft_isalpha(int c);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
 int				ft_isprint(int c);
-void			print_exit(void);
+void			print_exit2(void);
 size_t			ft_strlen(const char *s);
 void			*ft_memset(void *s, int c, size_t n);
 void			ft_bzero(void *s, size_t n);

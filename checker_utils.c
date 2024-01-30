@@ -1,16 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pushswap.c                                         :+:      :+:    :+:   */
+/*   checker_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/04 20:02:49 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/29 16:18:31 by achraiti         ###   ########.fr       */
+/*   Created: 2024/01/25 13:50:42 by achraiti          #+#    #+#             */
+/*   Updated: 2024/01/27 00:00:58 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
+
+int	is_empty(t_list *stacks)
+{
+	if (stacks->count_b == 0)
+		return (1);
+	return (0);
+}
+
+int	is_sorted(t_list *stacks)
+{
+	int	i;
+
+	i = 1;
+	if (stacks->content_length == 1)
+		return (1);
+	while (i < stacks->content_length)
+	{
+		if (*stacks->a[i - 1] > *stacks->a[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	check_overflow(t_list *info)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	while (i < info->content_length)
+	{
+		str = ft_itoa(*info->a[i]);
+		if (ft_strlen((str)) > 12)
+			print_exit(info);
+		free(str);
+		i++;
+	}
+}
 
 int	count_element(char *s)
 {
@@ -33,50 +72,15 @@ int	count_element(char *s)
 	return (rs);
 }
 
-void	checkers(t_list *info, char *s)
+void	free_content(t_list *info)
 {
-	check_args(s, info);
-	parse_stack(info);
-}
+	int	i;
 
-void	algo(t_list *info)
-{
-	if (info->flag_overflow == 1)
+	i = 0;
+	while (i < info->content_length)
 	{
-		ft_free1(info);
-		write(1, "Error\n", 6);
-		system("leaks push_swap");
-		exit(1);
-	}
-	else
-		push_swap(info);
-}
-
-int	main(int argc, char **argv)
-{
-	t_list	info;
-	int		i;
-	char	*s;
-	char	*tmp;
-
-	if (argc < 2)
-		exit(1);
-	tmp = NULL;
-	i = 1;
-	while (i < argc)
-	{
-		s = ft_strjoin(tmp, argv[i]);
-		free(tmp);
-		tmp = ft_strjoin(s, " ");
-		if (i != argc - 1 && argv[i] != s)
-			free(s);
+		free(info->content[i]);
 		i++;
 	}
-	free(tmp);
-	info.content_length = count_element(s);
-	initialize_t_list(s, &info);
-	checkers(&info, s);
-	if (s != argv[i - 1])
-		free(s);
-	algo(&info);
+	free(info->content);
 }

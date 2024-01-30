@@ -6,14 +6,14 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:33:22 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/10 11:53:02 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:04:34 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	print_exit(void)
+void	print_exit2(void)
 {
-	ft_printf("Error\n");
-	exit(0);
+	write(2, "Error\n", 6);
+	exit(1);
 }

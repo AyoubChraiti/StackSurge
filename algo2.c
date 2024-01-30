@@ -6,56 +6,50 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:51:46 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/22 21:03:20 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/28 14:46:18 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	calculate_cost(t_list *stacks, int index_b, int index_a)
+void	get_(t_stack *s, t_list *stacks, int num)
 {
-	int	cost;
+	int	i;
+	int	smallest_bigger;
+	int	smallest;
 
-	cost = 0;
-	if (index_b <= stacks->count_b / 2 || index_b == stacks->count_b / 2)
-		cost += index_b;
-	else
-		cost += stacks->count_b - index_b;
-	if (index_a <= stacks->content_length / 2 || index_a == stacks->content_length / 2)
-		cost += index_a;
-	else
-		cost += stacks->content_length - index_a;
-	return cost;
-}
-
-int	find_smallest_bigger(t_list *stacks, int num)
-{
-	int smallest_bigger;
-	int smallest;
-	int index_bigger;
-	int index_smallest;
-	int i;
-
+	i = 0;
 	smallest_bigger = INT_MAX;
 	smallest = INT_MAX;
-	index_bigger = -1;
-	index_smallest = 0;
-	i = 0;
 	while (i < stacks->content_length)
 	{
 		if (*stacks->a[i] > num && *stacks->a[i] < smallest_bigger)
 		{
 			smallest_bigger = *stacks->a[i];
-			index_bigger = i;
+			s->index_bigger = i;
 		}
 		if (*stacks->a[i] < smallest)
 		{
 			smallest = *stacks->a[i];
-			index_smallest = i;
+			s->index_smallest = i;
 		}
 		i++;
 	}
-	return (index_bigger != -1 ? index_bigger : index_smallest);
+}
+
+int	find_smallest_bigger(t_list *stacks, int num)
+{
+	t_stack	s;
+	int		i;
+
+	s.index_bigger = -1;
+	s.index_smallest = 0;
+	i = 0;
+	get_(&s, stacks, num);
+	if (s.index_bigger != -1)
+		return (s.index_bigger);
+	else
+		return (s.index_smallest);
 }
 
 t_match	find_cheapest_match(t_list *stacks)
@@ -63,7 +57,7 @@ t_match	find_cheapest_match(t_list *stacks)
 	int		i;
 	int		index_a;
 	int		cost;
-	t_match cheapest;
+	t_match	cheapest;
 
 	i = 0;
 	cheapest.cost = INT_MAX;
@@ -82,22 +76,36 @@ t_match	find_cheapest_match(t_list *stacks)
 	return (cheapest);
 }
 
+int	is_sorted1(t_list *stacks)
+{
+	int	i;
+
+	i = 1;
+	if (stacks->content_length == 1)
+		return (1);
+	while (i < stacks->content_length)
+	{
+		if (*stacks->a[i - 1] > *stacks->a[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	push_swap(t_list *stacks)
 {
-	t_match cheapest;
+	t_match	cheapest;
 
-	if (stacks->content_length == 1)
-		return;
-	else if (stacks->content_length == 2)
-		sort_two_elements(stacks);
+	if (is_sorted1(stacks))
+		return (ft_free1(stacks));
+	else if (stacks->content_length == 2 && *stacks->a[0] > *stacks->a[1])
+		sa(stacks);
 	else if (stacks->content_length == 3)
 		sort_three_elements(stacks);
 	else if (stacks->content_length > 3)
 	{
 		while (stacks->content_length > 3)
-		{
 			pb(stacks);
-		}
 		sort_three_elements(stacks);
 		while (stacks->count_b > 0)
 		{
@@ -108,4 +116,5 @@ void	push_swap(t_list *stacks)
 		}
 		rotate_smallest_to_top(stacks);
 	}
+	ft_free1(stacks);
 }

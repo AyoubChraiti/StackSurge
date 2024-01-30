@@ -6,122 +6,101 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 16:11:04 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/22 20:24:38 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:43:38 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	count_element(char *s)
+int	process_instruction(char *instruction, t_list *x)
 {
-	int	i;
-	int	rs;
+	if (ft_strncmp(instruction, "sa\n", 3) == 0)
+		sa(x);
+	else if (ft_strncmp(instruction, "sb\n", 3) == 0)
+		sb(x);
+	else if (ft_strncmp(instruction, "ss\n", 3) == 0)
+		ss(x);
+	else if (ft_strncmp(instruction, "pa\n", 3) == 0)
+		pa(x);
+	else if (ft_strncmp(instruction, "pb\n", 3) == 0)
+		pb(x);
+	else if (ft_strncmp(instruction, "ra\n", 3) == 0)
+		ra(x);
+	else if (ft_strncmp(instruction, "rb\n", 3) == 0)
+		rb(x);
+	else if (ft_strncmp(instruction, "rr\n", 3) == 0)
+		rr(x);
+	else if (ft_strncmp(instruction, "rra\n", 4) == 0)
+		rra(x);
+	else if (ft_strncmp(instruction, "rrb\n", 4) == 0)
+		rrb(x);
+	else if (ft_strncmp(instruction, "rrr\n", 4) == 0)
+		rrr(x);
+	else
+		return (0);
+	return (1);
+}
 
-	i = 0;
-	rs = 0;
-	while (s[i])
+void	read_instructions(t_list *stacks)
+{
+	char	*line;
+
+	line = get_next_line(0);
+	while (line != NULL)
 	{
-		if (s[i] == ' ' && s[i])
-			i++;
-		if (s[i] != ' ' && s[i])
+		if (!process_instruction(line, stacks))
 		{
-			rs++;
-			while (s[i] != ' ' && s[i] != '\0')
-				i++;
+			write(2, "Error\n", 6);
+			free(line);
+			exit(1);
 		}
+		free(line);
+		line = get_next_line(0);
 	}
-	return (rs);
 }
 
-int process_instruction(char *instruction, t_list *x)
+void	check_if_ok(t_list *stacks)
 {
-    if (ft_strncmp(instruction, "sa", 2) == 0)
-        sa(x);
-    else if (ft_strncmp(instruction, "sb", 2) == 0)
-        sb(x);
-    else if (ft_strncmp(instruction, "ss", 2) == 0)
-        ss(x);
-    else if (ft_strncmp(instruction, "pa", 2) == 0)
-        pa(x);
-    else if (ft_strncmp(instruction, "pb", 2) == 0)
-        pb(x);
-    else if (ft_strncmp(instruction, "ra", 2) == 0)
-        ra(x);
-    else if (ft_strncmp(instruction, "rb", 2) == 0)
-        rb(x);
-    else if (ft_strncmp(instruction, "rr", 2) == 0)
-        rr(x);
-    else if (ft_strncmp(instruction, "rra", 3) == 0)
-        rra(x);
-    else if (ft_strncmp(instruction, "rrb", 3) == 0)
-        rrb(x);
-    else if (ft_strncmp(instruction, "rrr", 3) == 0)
-        rrr(x);
-    else
-        return (0);
-    return (1);
+	if (is_sorted(stacks) && is_empty(stacks))
+		write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
 }
 
-int is_empty(t_list *stacks)
+void	checks(t_list *x, char *s)
 {
-    if (stacks->count_b == 0)
-        return (1);
-    return (0);
+	check_args1(s, x);
+	parse_stack(x);
+	algo(x);
+	read_instructions(x);
+	check_if_ok(x);
 }
 
-int is_sorted(t_list *stacks)
+int	main(int argc, char **argv)
 {
-    int i;
+	char	*tmp;
+	char	*s;
+	int		i;
+	t_list	x;
 
-    i = 1;
-    if (stacks->content_length == 1)
-        return (1);
-    while (i < stacks->content_length)
-    {
-        if (*stacks->a[i - 1] > *stacks->a[i])
-            return (0);
-        i++;
-    }
-    return (1);
-}
-
-int main(int argc, char **argv)
-{
-    char    *line;
-    char    *tmp;
-    char    *s;
-    int     i;
-    t_list  x;
-
-    if (argc < 2)
-        exit(1);
-    tmp = NULL;
+	if (argc < 2)
+		exit(1);
+	tmp = NULL;
 	i = 1;
 	while (i < argc)
 	{
 		s = ft_strjoin(tmp, argv[i]);
+		free(tmp);
 		tmp = ft_strjoin(s, " ");
+		if (i != argc - 1 && argv[i] != s)
+			free(s);
 		i++;
 	}
-	x.cont = s;
-    x.content_length = count_element(s);
-	x.count_b = 0;
-    check_args(s);
-    initialize_t_list(s, &x);
-    parse_stack(&x);
-    while (((line = get_next_line(0)) != NULL) && line[0] != '\0')
-    {
-        if (!process_instruction(line, &x))
-        {
-            ft_printf("Error\n");
-            free(line);
-            return (1);
-        }
-        free(line);
-    }
-    if (is_sorted(&x) && is_empty(&x))
-        ft_printf("OK\n");
-    else
-        ft_printf("KO\n");
-    return (0);
+	free(tmp);
+	x.content_length = count_element(s);
+	initialize_t_list(s, &x);
+	checks(&x, s);
+	if (s != argv[i - 1])
+		free(s);
+	ft_free1(&x);
 }

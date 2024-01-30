@@ -6,7 +6,7 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 19:05:40 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/10 11:52:34 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/26 13:12:06 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,5 @@ long long int	ft_atoi(const char *str)
 		rs = (rs * 10) + (str[i] - '0');
 		i++;
 	}
-	if (rs > 2147483647 || rs < -2147483648)
-		print_exit();
 	return (rs * sign);
 }

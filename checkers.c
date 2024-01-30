@@ -6,7 +6,7 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 13:17:33 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/19 21:37:45 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:56:51 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	check_sign(char *s)
 	while (s[i])
 	{
 		if (ft_isdigit(s[i]) && (s[i + 1] == '-' || s[i + 1] == '+'))
+			return (0);
+		if ((s[i] == '-' || s[i] == '+') && !ft_isdigit(s[i + 1]))
 			return (0);
 		i++;
 	}
@@ -54,14 +56,32 @@ int	check_dup(t_list *info)
 	return (1);
 }
 
+void	ft_free1(t_list *info)
+{
+	int	i;
+ 
+	i = 0;
+	while (i < info->content_length)
+	{
+		free(info->bak_a[i]);
+		free(info->bak_b[i]);
+		i++;
+	}
+	free(info->a);
+	free(info->b);
+	free(info->bak_a);
+	free(info->bak_b);
+}
+
 void	parse_stack(t_list *info)
 {
 	if (!check_dup(info) || !check_sign(info->cont))
-		print_exit();
+		print_exit(info);
 }
 
-void	print_exit(void)
+void	print_exit(t_list *info)
 {
-	ft_printf("Error\n");
+	write(2, "Error\n", 6);
+	ft_free1(info);
 	exit(1);
 }

@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   checker_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 13:16:28 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/23 09:44:27 by achraiti         ###   ########.fr       */
+/*   Created: 2024/01/29 16:41:56 by achraiti          #+#    #+#             */
+/*   Updated: 2024/01/29 16:44:05 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pushswap.h"
 
-int	ft_isdigit(int c)
+void	algo(t_list *info)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	if (info->flag_overflow == 1)
+	{
+		ft_free1(info);
+		write(1, "Error\n", 6);
+		exit(1);
+	}
 }

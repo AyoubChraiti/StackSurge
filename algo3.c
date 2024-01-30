@@ -6,11 +6,28 @@
 /*   By: achraiti <achraiti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:18:32 by achraiti          #+#    #+#             */
-/*   Updated: 2024/01/22 16:18:48 by achraiti         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:45:15 by achraiti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
+
+int	calculate_cost(t_list *stacks, int index_b, int index_a)
+{
+	int	cost;
+
+	cost = 0;
+	if (index_b <= stacks->count_b / 2 || index_b == stacks->count_b / 2)
+		cost += index_b;
+	else
+		cost += stacks->count_b - index_b;
+	if (index_a <= stacks->content_length / 2
+		|| index_a == stacks->content_length / 2)
+		cost += index_a;
+	else
+		cost += stacks->content_length - index_a;
+	return (cost);
+}
 
 void	rotate_until_a(t_list *stacks, int index)
 {
@@ -29,9 +46,9 @@ void	rotate_until_a(t_list *stacks, int index)
 
 void	rotate_smallest_to_top(t_list *stacks)
 {
-	int smallest;
-	int index_smallest;
-	int i;
+	int	smallest;
+	int	index_smallest;
+	int	i;
 
 	smallest = INT_MAX;
 	index_smallest = -1;
