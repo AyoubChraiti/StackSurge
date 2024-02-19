@@ -6,14 +6,6 @@
 
 PushSwap is a sorting algorithm project that aims to efficiently sort a stack of integers using a predefined set of operations. The project is part of [1337](#1337) curriculum and is implemented in C.
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Algorithm Overview](#algorithm-overview)
-- [Examples](#examples)
-- [Contributing](#contributing)
-
 ## Installation
 
 To compile the PushSwap program, use the following command:
