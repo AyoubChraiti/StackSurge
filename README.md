@@ -2,8 +2,6 @@
 
 ![Screenshot](https://i.imgur.com/pfaWg86.png)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-
 ## Description
 
 PushSwap is a sorting algorithm project that aims to efficiently sort a stack of integers using a predefined set of operations. The project is part of [1337](#1337) curriculum and is implemented in C.
