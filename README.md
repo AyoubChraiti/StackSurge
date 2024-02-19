@@ -1,6 +1,6 @@
 # efficient-sorting-algorithm - PushSwap
 
-![Screenshot]([https://example.com/game_screenshot.png](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*ENpvOgipHZf5z04PzW-yTg.png))
+![Screenshot](https://i.imgur.com/pfaWg86.png))
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
