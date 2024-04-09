@@ -19,9 +19,7 @@ This will generate the executable file push_swap.
 ## Usage
 Execute the program with a list of integers as command-line arguments:
 
-```
-bash
-Copy code
+```bash
 ./push_swap 4 2 8 1 3
 ```
 This will display the list of operations to sort the stack in ascending order.
